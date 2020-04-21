@@ -4,7 +4,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import calendarIcon from "../assets/icon_calender.svg";
 import searchIcon from "../assets/icon_search.svg";
-import "../styles/dataSelector.css";
+
 function DateSelector() {
   const { RangePicker } = DatePicker;
   function onChange(dates: any[] | null, dateStrings: any[] | null) {
