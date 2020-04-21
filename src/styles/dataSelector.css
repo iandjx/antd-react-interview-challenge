@@ -1,0 +1,37 @@
+.container {
+  border-style: solid;
+  border-width: 0.1em;
+  border-radius: 5px 0px 0px 5px;
+  height: 3em;
+  border-color: #e0e0e0;
+  width: 25em;
+}
+.calendar {
+  width: 1.5em;
+  margin-left: 2em;
+}
+.range-picker {
+  margin-left: -1em;
+  border-right: 0.1em;
+  border-style: solid;
+  border-top-color: white;
+  border-bottom-color: white;
+  border-left-color: white;
+}
+
+.search {
+  margin-right: 1em;
+  margin-left: 1em;
+  width: 1.5em;
+  align-self: center;
+}
+
+.search-container {
+  border-style: solid;
+  border-width: 0.1em;
+  border-left-width: 0;
+  border-radius: 0px 5px 5px 0px;
+  height: 3em;
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+}
