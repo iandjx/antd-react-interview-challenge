@@ -1,5 +1,5 @@
 import namor from "namor";
-
+import moment from "moment";
 const txtgen = require("txtgen");
 
 const range = (len) => {
@@ -10,26 +10,14 @@ const range = (len) => {
   return arr;
 };
 
-function randomDate(start, end) {
-  var d = new Date(
-      start.getTime() + Math.random() * (end.getTime() - start.getTime())
-    ),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
-
 const newPerson = () => {
   return {
     from: namor.generate({ words: 1, numbers: 0 }),
     to: namor.generate({ words: 1, numbers: 0 }),
     subject: txtgen.sentence(),
-    date: randomDate(new Date(2012, 0, 1), new Date()),
+    date: moment(
+      new Date(+new Date() - Math.floor(Math.random() * 10000000000))
+    ),
   };
 };
 

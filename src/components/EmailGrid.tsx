@@ -180,7 +180,14 @@ function EmailGrid() {
     []
   );
 
-  const data = React.useMemo(() => makeData(20), []);
+  const data = React.useMemo(() => {
+    const rawData = makeData(20);
+    const displayData = rawData.map((email: any) => {
+      email.date = email.date.format("MM/DD/YYYY");
+      return email;
+    });
+    return displayData;
+  }, []);
 
   return <Table columns={columns} data={data} />;
 }
