@@ -1,5 +1,7 @@
 import namor from "namor";
-import { moment } from "moment";
+
+const txtgen = require("txtgen");
+
 const range = (len) => {
   const arr = [];
   for (let i = 0; i < len; i++) {
@@ -7,12 +9,6 @@ const range = (len) => {
   }
   return arr;
 };
-
-// function randomDate(start, end) {
-//   return new Date(
-//     start.getTime() + Math.random() * (end.getTime() - start.getTime())
-//   );
-// }
 
 function randomDate(start, end) {
   var d = new Date(
@@ -32,7 +28,7 @@ const newPerson = () => {
   return {
     from: namor.generate({ words: 1, numbers: 0 }),
     to: namor.generate({ words: 1, numbers: 0 }),
-    subject: namor.generate({ words: 4, numbers: 0 }),
+    subject: txtgen.sentence(),
     date: randomDate(new Date(2012, 0, 1), new Date()),
   };
 };
