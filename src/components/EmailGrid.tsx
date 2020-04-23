@@ -1,5 +1,5 @@
 import React from "react";
-import { Column, useTable } from "react-table";
+import { Column, useTable, useSortBy } from "react-table";
 
 import makeData from "../makeData";
 
@@ -16,10 +16,13 @@ function Table<T extends object>({ columns, data }: ITable<T>) {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable<T>({
-    columns,
-    data,
-  });
+  } = useTable<T>(
+    {
+      columns,
+      data,
+    },
+    useSortBy
+  );
 
   // Render the UI for your table
   return (
@@ -27,8 +30,13 @@ function Table<T extends object>({ columns, data }: ITable<T>) {
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            {headerGroup.headers.map((column: any) => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render("Header")}
+                <span>
+                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                </span>
+              </th>
             ))}
           </tr>
         ))}
@@ -53,38 +61,21 @@ function EmailGrid() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Name",
-        columns: [
-          {
-            Header: "First Name",
-            accessor: "firstName",
-          },
-          {
-            Header: "Last Name",
-            accessor: "lastName",
-          },
-        ],
+        Header: "From",
+        accessor: "from",
+      },
+
+      {
+        Header: "To",
+        accessor: "to",
       },
       {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Age",
-            accessor: "age",
-          },
-          {
-            Header: "Visits",
-            accessor: "visits",
-          },
-          {
-            Header: "Status",
-            accessor: "status",
-          },
-          {
-            Header: "Profile Progress",
-            accessor: "progress",
-          },
-        ],
+        Header: "Subject",
+        accessor: "subject",
+      },
+      {
+        Header: "Date",
+        accessor: "date",
       },
     ],
     []
