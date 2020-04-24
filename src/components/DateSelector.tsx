@@ -40,10 +40,6 @@ function DateSelector() {
   };
   return (
     <React.Fragment>
-      {console.log(range)}
-      <p>
-        {range.fromDate.toLocaleString} I am {range.toDate.toString}
-      </p>
       <Space className="container" size="middle">
         <img alt="calendar-icon" src={calendarIcon} className="calendar" />
         <RangePicker

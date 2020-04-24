@@ -1,85 +1,14 @@
 import React from "react";
-import {
-  Column,
-  useTable,
-  useSortBy,
-  useFilters,
-  useGlobalFilter,
-} from "react-table";
-
-import makeData from "../makeData";
+import { Column, useTable, useSortBy } from "react-table";
 import { useSelector } from "react-redux";
-import { Email } from "../store/reducers/filter";
 import moment from "moment";
+
 interface ITable<T extends object> {
   columns: Column<T>[];
   data: T[];
 }
 
-const DefaultColumnFilter = ({
-  column: { filterValue, preFilteredRows, setFilter },
-}: any) => {
-  const count = preFilteredRows.length;
-
-  return (
-    <input
-      value={filterValue || ""}
-      onChange={(e) => {
-        setFilter(e.target.value || undefined);
-      }}
-      placeholder={`Search ${count} records...`}
-    />
-  );
-};
-
-const GlobalFilter = ({
-  preGlobalFilteredRows,
-  globalFilter,
-  setGlobalFilter,
-}: any) => {
-  const count = preGlobalFilteredRows && preGlobalFilteredRows.length;
-
-  return (
-    <span>
-      Search:{" "}
-      <input
-        value={globalFilter || ""}
-        onChange={(e) => {
-          setGlobalFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-        }}
-        placeholder={`${count} records...`}
-        style={{
-          border: "0",
-        }}
-      />
-    </span>
-  );
-};
-
 function Table<T extends object>({ columns, data }: ITable<T>) {
-  const filterTypes = React.useMemo(
-    () => ({
-      text: (rows: any, id: any, filterValue: any) => {
-        return rows.filter((row: any) => {
-          const rowValue = row.values[id];
-          return rowValue !== undefined
-            ? String(rowValue)
-                .toLowerCase()
-                .startsWith(String(filterValue).toLowerCase())
-            : true;
-        });
-      },
-    }),
-    []
-  );
-
-  const defaultColumn = React.useMemo(
-    () => ({
-      Filter: DefaultColumnFilter,
-    }),
-    []
-  );
-
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -87,21 +16,12 @@ function Table<T extends object>({ columns, data }: ITable<T>) {
     headerGroups,
     rows,
     prepareRow,
-    state,
     visibleColumns,
-    preGlobalFilteredRows,
-    setGlobalFilter,
   } = useTable<T>(
     {
       columns,
       data,
-      defaultColumn,
-      filterTypes,
     },
-
-    useFilters,
-
-    useGlobalFilter,
     useSortBy
   );
 
@@ -129,13 +49,7 @@ function Table<T extends object>({ columns, data }: ITable<T>) {
             style={{
               textAlign: "left",
             }}
-          >
-            <GlobalFilter
-              preGlobalFilteredRows={preGlobalFilteredRows}
-              globalFilter={state.globalFilter}
-              setGlobalFilter={setGlobalFilter}
-            />
-          </th>
+          />
         </tr>
       </thead>
       <tbody {...getTableBodyProps()}>
@@ -160,23 +74,19 @@ function EmailGrid() {
       {
         Header: "From",
         accessor: "from",
-        filter: "text",
       },
 
       {
         Header: "To",
         accessor: "to",
-        filter: "text",
       },
       {
         Header: "Subject",
         accessor: "subject",
-        filter: "text",
       },
       {
         Header: "Date",
         accessor: "date",
-        filter: "text",
       },
     ],
     []
