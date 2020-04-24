@@ -1,7 +1,7 @@
 import namor from "namor";
 import moment from "moment";
 const txtgen = require("txtgen");
-
+const randomEmail = require("random-email");
 const range = (len) => {
   const arr = [];
   for (let i = 0; i < len; i++) {
@@ -12,8 +12,11 @@ const range = (len) => {
 
 const newPerson = () => {
   return {
-    from: namor.generate({ words: 1, numbers: 0 }),
-    to: namor.generate({ words: 1, numbers: 0 }),
+    from: randomEmail({ domain: "gmail.com" }),
+    to:
+      randomEmail({ domain: "gmail.com" }) +
+      ", " +
+      randomEmail({ domain: "gmail.com" }),
     subject: txtgen.sentence(),
     date: moment(
       new Date(+new Date() - Math.floor(Math.random() * 10000000000))
