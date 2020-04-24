@@ -183,28 +183,20 @@ function EmailGrid() {
   );
 
   const emailData = useSelector((state: any) => state.filter.emails);
-  console.log(emailData);
 
-  const display2data: any = emailData.map((element: any) => {
-    const isMoment = moment.isMoment(element.date);
-    if (isMoment) {
-      element.date = element.date.format("MM/DD/YYYY");
-    }
-
-    return element;
-  });
-
-  console.log(display2data);
   const data = React.useMemo(() => {
-    const rawData = makeData(20);
+    const rawData = emailData;
     const displayData = rawData.map((email: any) => {
-      email.date = email.date.format("MM/DD/YYYY");
+      const isMoment = moment.isMoment(email.date);
+      if (isMoment) {
+        email.date = email.date.format("MM/DD/YYYY");
+      }
       return email;
     });
     return displayData;
-  }, []);
+  }, [emailData]);
 
-  return <Table columns={columns} data={display2data} />;
+  return <Table columns={columns} data={data} />;
 }
 
 export default EmailGrid;
