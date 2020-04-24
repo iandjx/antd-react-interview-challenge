@@ -8,7 +8,9 @@ import {
 } from "react-table";
 
 import makeData from "../makeData";
-
+import { useSelector } from "react-redux";
+import { Email } from "../store/reducers/filter";
+import moment from "moment";
 interface ITable<T extends object> {
   columns: Column<T>[];
   data: T[];
@@ -180,6 +182,19 @@ function EmailGrid() {
     []
   );
 
+  const emailData = useSelector((state: any) => state.filter.emails);
+  console.log(emailData);
+
+  const display2data: any = emailData.map((element: any) => {
+    const isMoment = moment.isMoment(element.date);
+    if (isMoment) {
+      element.date = element.date.format("MM/DD/YYYY");
+    }
+
+    return element;
+  });
+
+  console.log(display2data);
   const data = React.useMemo(() => {
     const rawData = makeData(20);
     const displayData = rawData.map((email: any) => {
@@ -189,7 +204,7 @@ function EmailGrid() {
     return displayData;
   }, []);
 
-  return <Table columns={columns} data={data} />;
+  return <Table columns={columns} data={display2data} />;
 }
 
 export default EmailGrid;
