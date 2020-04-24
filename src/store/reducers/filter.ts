@@ -17,11 +17,14 @@ const filterReducer = (state = initialState, action: any) => {
   const { type } = action;
   switch (type) {
     case FILTER_EMAIL:
-      return state.emails.filter(
-        (email: Email) =>
-          moment(email.date).isAfter(moment(action.fromDate)) &&
-          moment(email.date).isBefore(moment(action.toDate))
-      );
+      return {
+        ...state,
+        emails: state.emails.filter(
+          (email: Email) =>
+            moment(email.date).isAfter(moment(action.fromDate)) &&
+            moment(email.date).isBefore(moment(action.toDate))
+        ),
+      };
     default:
       return state;
   }

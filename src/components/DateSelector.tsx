@@ -6,13 +6,15 @@ import calendarIcon from "../assets/icon_calender.svg";
 import searchIcon from "../assets/icon_search.svg";
 import { useDispatch } from "react-redux";
 
+import * as actions from "../store/actions/index";
+
 export interface Ranges {
   fromDate: moment.Moment;
   toDate: moment.Moment;
 }
 
 function DateSelector() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [range, setRange] = useState<Ranges>({
     fromDate: moment(),
     toDate: moment(),
@@ -32,6 +34,10 @@ function DateSelector() {
       console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
     }
   }
+
+  const onSearchhandler = (range: Ranges) => {
+    dispatch(actions.filterEmail(range));
+  };
   return (
     <React.Fragment>
       {console.log(range)}
@@ -58,7 +64,7 @@ function DateSelector() {
           alt="search-icon"
           src={searchIcon}
           className="search"
-          onClick={() => console.log("test")}
+          onClick={() => onSearchhandler(range)}
         />
       </Space>
     </React.Fragment>
