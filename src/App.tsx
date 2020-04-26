@@ -2,14 +2,18 @@ import React from "react";
 
 import DateSelector from "./components/DateSelector";
 import EmailCounter from "./components/EmailCounter";
-import EmailGrid from "./components/EmailGrid";
+import EmailTable from "./components/EmailTable";
+import { Row, Col } from "antd";
+
 function App() {
   return (
-    <div className="App">
-      <DateSelector />
-      <EmailCounter />
-      <EmailGrid />
-    </div>
+    <Row>
+      <Col span={24} style={{ height: "100%" }}>
+        {/* <DateSelector /> */}
+        {/* <EmailCounter /> */}
+        <EmailTable />
+      </Col>
+    </Row>
   );
 }
 
