@@ -16,8 +16,8 @@ function App() {
   return (
     <Row>
       <Col span={24} style={{ height: "100%" }}>
-        {/* <DateSelector /> */}
-        {/* <EmailCounter /> */}
+        <DateSelector />
+        <EmailCounter />
         <EmailTable />
       </Col>
     </Row>

@@ -1,18 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import moment from "moment";
 import { Table, Space } from "antd";
 import { dateFormat } from "../utils/dateFormatter";
 import clipIcon from "../assets/icon_clip.svg";
-const toFormat = (element: any) =>
-  element.to.forEach((to: any) => {
-    console.log(to.address);
-  });
+import "antd/dist/antd.css";
+import { useFlexLayout } from "react-table";
 
 const columns = [
   {
     title: "From",
     dataIndex: "from",
+    ellipsis: true,
+    width: 200,
   },
 
   {
@@ -21,21 +20,24 @@ const columns = [
     render: (to: any) => {
       if (to.length > 1) {
         return (
-          <React.Fragment>
-            <span>{to[0].address}</span>
-            <span style={{ marginLeft: "2em" }}>{to.length}</span>
-          </React.Fragment>
+          <div style={{ display: "flex" }}>
+            <span>{to[0].address}...</span>
+            <span className="to-counter">+{to.length - 1}</span>
+          </div>
         );
       } else {
         console.log(to.length);
         return <span>{to[0].address}</span>;
       }
     },
+    width: 250,
+    ellipsis: true,
   },
   {
-    title: "Body",
+    title: "Subject",
     dataIndex: "body",
-    width: 400,
+    width: 600,
+    ellipsis: true,
   },
   {
     dataIndex: "hasAttachment",
@@ -47,6 +49,7 @@ const columns = [
       );
       return render;
     },
+    width: 70,
   },
   {
     title: "Date",
@@ -55,6 +58,7 @@ const columns = [
     sorter: (a: any, b: any) => {
       return a.date.localeCompare(b.date);
     },
+    width: 150,
   },
 ];
 
@@ -63,7 +67,7 @@ function EmailTable() {
 
   return (
     <Space>
-      <Table dataSource={emailData} columns={columns} size="large" />
+      <Table dataSource={emailData} columns={columns} size="middle" bordered />
     </Space>
   );
 }
