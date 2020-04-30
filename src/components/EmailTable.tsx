@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Table, Space } from "antd";
+import { Table, Space, Tag } from "antd";
 import { dateFormat } from "../utils/dateFormatter";
 import clipIcon from "../assets/icon_clip.svg";
 import "antd/dist/antd.css";
@@ -20,9 +20,9 @@ const columns = [
     render: (to: any) => {
       if (to.length > 1) {
         return (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }} className="tag-container">
             <span>{to[0].address}...</span>
-            <span className="to-counter">+{to.length - 1}</span>
+            <Tag className="to-counter">+{to.length - 1}</Tag>
           </div>
         );
       } else {
@@ -43,11 +43,15 @@ const columns = [
     dataIndex: "hasAttachment",
     render: (hasAttachment: boolean) => {
       const render = hasAttachment ? (
-        <img alt="clip-icon" src={clipIcon} className="calendar" />
+        <img alt="clip-icon" src={clipIcon} className="clip-icon" />
       ) : (
         ""
       );
-      return render;
+      return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {render}
+        </div>
+      );
     },
     width: 70,
   },
@@ -67,7 +71,7 @@ function EmailTable() {
 
   return (
     <Space>
-      <Table dataSource={emailData} columns={columns} size="middle" bordered />
+      <Table dataSource={emailData} columns={columns} size="middle" />
     </Space>
   );
 }
