@@ -1,26 +1,20 @@
 import React from "react";
+import logo from "./assets/logo.png";
+import { ConfigProvider } from "antd";
 
-import DateSelector from "./components/DateSelector";
-import EmailCounter from "./components/EmailCounter";
-import EmailTable from "./components/EmailTable";
-import { Row, Col } from "antd";
-import { dateFormat } from "./utils/dateFormatter";
+import Home from "./layout/Home";
+import "antd/dist/antd.css";
+const customizeRenderEmpty = () => (
+  <div className="empty-container">
+    <img className="empty-img" src={logo} alt="lgo" />
+  </div>
+);
 
-import { mockdata } from "./mockdata";
 function App() {
-  // mockdata.forEach((element: any) => {
-  //   element.to.forEach((to: any) => {
-  //     console.log(to.address);
-  //   });
-  // });
   return (
-    <Row>
-      <Col span={24} style={{ height: "100%" }}>
-        <DateSelector />
-        <EmailCounter />
-        <EmailTable />
-      </Col>
-    </Row>
+    <ConfigProvider renderEmpty={customizeRenderEmpty}>
+      <Home />
+    </ConfigProvider>
   );
 }
 
