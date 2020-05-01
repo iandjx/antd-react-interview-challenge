@@ -7,11 +7,14 @@ function EmailCounter() {
 
   const { Title, Text } = Typography;
   return (
-    <Title level={4}>
-      Results:
-      <Text className="counter"> {emailCount} </Text>
-      mail(s)
-    </Title>
+    <React.Fragment>
+      <Title level={4}>
+        Results:
+        <Text className="counter"> {emailCount} </Text>
+        mail(s)
+      </Title>
+      <hr />
+    </React.Fragment>
   );
 }
 export default EmailCounter;
