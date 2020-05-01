@@ -11,7 +11,7 @@ const columns = [
     title: "From",
     dataIndex: "from",
     ellipsis: true,
-    width: 200,
+    width: "15%",
   },
 
   {
@@ -30,13 +30,13 @@ const columns = [
         return <span>{to[0].address}</span>;
       }
     },
-    width: 250,
+    width: "20%",
     ellipsis: true,
   },
   {
     title: "Subject",
     dataIndex: "body",
-    width: 600,
+    width: "50%",
     ellipsis: true,
   },
   {
@@ -53,7 +53,7 @@ const columns = [
         </div>
       );
     },
-    width: 70,
+    width: "5%",
   },
   {
     title: "Date",
@@ -62,7 +62,7 @@ const columns = [
     sorter: (a: any, b: any) => {
       return a.date.localeCompare(b.date);
     },
-    width: 150,
+    width: "10%",
   },
 ];
 
@@ -71,7 +71,12 @@ function EmailTable() {
 
   return (
     <Space>
-      <Table dataSource={emailData} columns={columns} size="middle" />
+      <Table
+        dataSource={emailData}
+        columns={columns}
+        size="middle"
+        showHeader={emailData.length > 0 ? true : false}
+      />
     </Space>
   );
 }
