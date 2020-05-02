@@ -4,7 +4,6 @@ import { Table, Space, Tag } from "antd";
 import { dateFormat } from "../utils/dateFormatter";
 import clipIcon from "../assets/icon_clip.svg";
 import "antd/dist/antd.css";
-import { useFlexLayout } from "react-table";
 
 const columns = [
   {
