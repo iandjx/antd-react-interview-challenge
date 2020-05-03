@@ -8,7 +8,6 @@ export default function EmailSorter() {
   const [subject, setSubject] = React.useState("");
   const [date, setDate] = React.useState("");
 
-  const sort = (header: string) => {};
   const emailData = useSelector((state: any) => state.filter.emails);
 
   const sortSwitch = (header: any) => {
@@ -83,6 +82,8 @@ export default function EmailSorter() {
       default:
         break;
     }
+
+    //dispatch action
   };
 
   return (
