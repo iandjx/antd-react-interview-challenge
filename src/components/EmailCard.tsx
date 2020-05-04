@@ -69,7 +69,7 @@ export default function EmailCard(props: any) {
                   textAlign: "center",
                 }}
               >
-                time
+                {email.date}
               </Text>
             </div>
             <div>{toEmail}</div>

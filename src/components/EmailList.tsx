@@ -3,13 +3,18 @@ import { useSelector } from "react-redux";
 import EmailCard from "./EmailCard";
 
 export default function EmailList() {
-  const emailData = useSelector((state: any) => state.filter.emails);
-  console.log(emailData);
+  let emailData = useSelector((state: any) => state.filter.emails);
+  let sortedEmail = useSelector((state: any) => state.sort.sortedEmails);
+  console.log(sortedEmail.length);
+  let displayedEmail = emailData;
+  if (sortedEmail.length > 0) {
+    displayedEmail = sortedEmail;
+  }
 
   return (
     <div>
-      {emailData &&
-        emailData.map((email: any) => {
+      {displayedEmail &&
+        displayedEmail.map((email: any) => {
           return <EmailCard key={email.id} email={email} />;
         })}
     </div>

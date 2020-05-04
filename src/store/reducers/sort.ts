@@ -8,17 +8,17 @@ const initialState = {
 //sortBy, direction, emailData
 const sortReducer = (state = initialState, action: any) => {
   const { type, sortBy, direction, emailData } = action;
-
+  let sortedEmail;
   switch (type) {
     case SORT_EMAIL:
       if (sortBy !== "date" && sortBy !== "to") {
         if (direction === "ascending") {
-          emailData.sort((a: any, b: any) => {
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return a[sortBy] > b[sortBy] ? -1 : 1;
           });
         }
-        if (direction === "descending") {
-          emailData.sort((a: any, b: any) => {
+        if (direction === "descending" || direction === "") {
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return a[sortBy] > b[sortBy] ? 1 : -1;
           });
         }
@@ -26,12 +26,12 @@ const sortReducer = (state = initialState, action: any) => {
 
       if (sortBy === "to") {
         if (direction === "ascending") {
-          emailData.sort((a: any, b: any) => {
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return a.to[0].address > b.to[0].address ? -1 : 1;
           });
         }
-        if (direction === "descending") {
-          emailData.sort((a: any, b: any) => {
+        if (direction === "descending" || direction === "") {
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return a.to[0].address > b.to[0].address ? 1 : -1;
           });
         }
@@ -39,12 +39,14 @@ const sortReducer = (state = initialState, action: any) => {
 
       if (sortBy === "date") {
         if (direction === "ascending") {
-          emailData.sort((a: any, b: any) => {
+          console.log("date" + direction);
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return a.date.localeCompare(b.date);
           });
         }
-        if (direction === "descending") {
-          emailData.sort((a: any, b: any) => {
+        if (direction === "descending" || direction === "") {
+          console.log("date" + direction);
+          sortedEmail = [...emailData].sort((a: any, b: any) => {
             return -a.date.localeCompare(b.date);
           });
         }
@@ -52,8 +54,8 @@ const sortReducer = (state = initialState, action: any) => {
 
       return {
         ...state,
-        sortedEmails: emailData,
-        emailCount: emailData.length,
+        sortedEmails: sortedEmail,
+        emailCount: sortedEmail ? sortedEmail.length : 0,
       };
     default:
       return state;

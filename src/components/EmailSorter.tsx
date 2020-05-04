@@ -29,7 +29,6 @@ export default function EmailSorter() {
     console.log(sortedData);
     switch (header) {
       case "from":
-        console.log(header + from);
         if (from === "descending") {
           setFrom("ascending");
           const sort: sortInterface = {
@@ -75,7 +74,7 @@ export default function EmailSorter() {
         }
 
         break;
-      case "subject":
+      case "body":
         if (subject === "descending") {
           setSubject("ascending");
           const sort: sortInterface = {
@@ -149,7 +148,7 @@ export default function EmailSorter() {
       |
       <Button
         type="link"
-        onClick={() => sortSwitch("subject")}
+        onClick={() => sortSwitch("body")}
         ghost
         style={{ color: "rgb(136, 136, 136)" }}
       >
