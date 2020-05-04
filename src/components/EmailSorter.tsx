@@ -1,31 +1,54 @@
 import React from "react";
 import { Button } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../store/actions/index";
 
 export default function EmailSorter() {
+  const dispatch = useDispatch();
+
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
   const [subject, setSubject] = React.useState("");
   const [date, setDate] = React.useState("");
 
   const emailData = useSelector((state: any) => state.filter.emails);
+  const sortedData = useSelector((state: any) => {
+    if (state.sort === undefined) {
+      return [];
+    }
+    return state.sort.sortedEmails;
+  });
+
+  interface sortInterface {
+    sortBy: string;
+    direction: string;
+    emailData: Array<any>;
+  }
 
   const sortSwitch = (header: any) => {
-    const sortedData = [...emailData];
+    console.log(sortedData);
     switch (header) {
       case "from":
+        console.log(header + from);
         if (from === "descending") {
           setFrom("ascending");
-          sortedData.sort((a: any, b: any) => {
-            return a.from > b.from ? -1 : 1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: from,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
+          console.log(sortedData);
         }
 
         if (from === "ascending" || from === "") {
           setFrom("descending");
-          sortedData.sort((a: any, b: any) => {
-            return a.from > b.from ? 1 : -1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: from,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
 
         break;
@@ -33,32 +56,44 @@ export default function EmailSorter() {
       case "to":
         if (to === "descending") {
           setTo("ascending");
-          sortedData.sort((a: any, b: any) => {
-            return a.to[0].address > b.to[0].address ? -1 : 1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: to,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
 
         if (to === "ascending" || to === "") {
           setTo("descending");
-          sortedData.sort((a: any, b: any) => {
-            return a.to[0].address > b.to[0].address ? 1 : -1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: to,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
 
         break;
       case "subject":
         if (subject === "descending") {
           setSubject("ascending");
-          sortedData.sort((a: any, b: any) => {
-            return a.body > b.body ? -1 : 1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: subject,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
 
         if (subject === "ascending" || subject === "") {
           setSubject("descending");
-          sortedData.sort((a: any, b: any) => {
-            return a.body > b.body ? 1 : -1;
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: subject,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
         console.log(sortedData);
         break;
@@ -66,18 +101,24 @@ export default function EmailSorter() {
       case "date":
         if (date === "descending") {
           setDate("ascending");
-          sortedData.sort((a: any, b: any) => {
-            return a.date.localeCompare(b.date);
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: date,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
 
         if (date === "ascending" || date === "") {
           setDate("descending");
-          sortedData.sort((a: any, b: any) => {
-            return -a.date.localeCompare(b.date);
-          });
+          const sort: sortInterface = {
+            sortBy: header,
+            direction: date,
+            emailData,
+          };
+          dispatch(actions.sortEmail(sort));
         }
-        console.log(sortedData);
+
         break;
       default:
         break;

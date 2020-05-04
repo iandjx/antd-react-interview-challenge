@@ -7,10 +7,12 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import filterReducer from "./store/reducers/filter";
+import sortReducer from "./store/reducers/sort";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   filter: filterReducer,
+  sort: sortReducer,
 });
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
 
