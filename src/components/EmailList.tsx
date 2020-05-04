@@ -7,7 +7,7 @@ export default function EmailList() {
   let sortedEmail = useSelector((state: any) => state.sort.sortedEmails);
   console.log(sortedEmail.length);
   let displayedEmail = emailData;
-  if (sortedEmail.length > 0) {
+  if (sortedEmail.length > 0 && sortedEmail.length === emailData.length) {
     displayedEmail = sortedEmail;
   }
 

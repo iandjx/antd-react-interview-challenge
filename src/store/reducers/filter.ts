@@ -20,7 +20,7 @@ const filterReducer = (state = initialState, action: any) => {
   const { type } = action;
   switch (type) {
     case FILTER_EMAIL:
-      const searchResult = state.emails.filter(
+      const searchResult = seedData.filter(
         (email: any) =>
           moment(email.date).isAfter(moment(action.fromDate)) &&
           moment(email.date).isBefore(moment(action.toDate))

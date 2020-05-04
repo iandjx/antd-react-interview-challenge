@@ -6,6 +6,8 @@ import "antd/dist/antd.css";
 import EmailCard from "./components/EmailCard";
 import EmailList from "./components/EmailList";
 import EmailSorter from "./components/EmailSorter";
+import DateSelector from "./components/DateSelector";
+import EmailCounter from "./components/EmailCounter";
 
 const customizeRenderEmpty = () => (
   <div className="empty-container">
@@ -18,7 +20,10 @@ function App() {
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
       {/* <Home /> */}
       {/* <EmailCard /> */}
+
       <EmailSorter />
+      <DateSelector />
+      <EmailCounter />
       <EmailList />
     </ConfigProvider>
   );
