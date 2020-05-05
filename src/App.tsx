@@ -8,6 +8,9 @@ import EmailList from "./components/EmailList";
 import EmailSorter from "./components/EmailSorter";
 import DateSelector from "./components/DateSelector";
 import EmailCounter from "./components/EmailCounter";
+import MobileHome from "./layout/MobileHome";
+import { useMediaQuery } from "react-responsive";
+import MediaQuery from "react-responsive";
 
 const customizeRenderEmpty = () => (
   <div className="empty-container">
@@ -16,15 +19,13 @@ const customizeRenderEmpty = () => (
 );
 
 function App() {
+  const isBigScreen = useMediaQuery({ query: "(min-width: 769px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
   return (
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
-      {/* <Home /> */}
-      {/* <EmailCard /> */}
-
-      <EmailSorter />
-      <DateSelector />
-      <EmailCounter />
-      <EmailList />
+      {isMobile && <MobileHome />}
+      {isBigScreen && <Home />}
     </ConfigProvider>
   );
 }
