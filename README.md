@@ -10,8 +10,10 @@
 - ~~Create breakpoint rules for EmailTable and EmailList~~
 - ~~Format time/date in mobile view correctly~~
 - ~~Implement onClick of to email address to launch email in browser~~
-- Add carets when sorting in mobile view
+- ~~Add carets when sorting in mobile view~~
 
 ## Nice Todos
 
 - Sync sorting in mobile and desktop view
+- Transfer all styling to less
+- Replace 'any' types

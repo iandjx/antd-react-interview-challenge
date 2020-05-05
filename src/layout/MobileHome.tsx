@@ -34,7 +34,6 @@ const MobileHome = () => {
               <EmailList />
             </div>
           </Content>
-          <Footer />
         </Layout>
       </Col>
     </Row>

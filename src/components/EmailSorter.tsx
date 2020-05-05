@@ -1,7 +1,10 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Typography } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../store/actions/index";
+import caretIcon from "../assets/icon_arrow01.svg";
+
+const { Text } = Typography;
 
 export default function EmailSorter() {
   const dispatch = useDispatch();
@@ -24,13 +27,26 @@ export default function EmailSorter() {
     direction: string;
     emailData: Array<any>;
   }
-
+  const ascendingCaret = (
+    <img src={caretIcon} alt="caret" className="caret-icon" />
+  );
+  const descendingCaret = (
+    <img
+      src={caretIcon}
+      alt="caret"
+      style={{ transform: "rotate(180deg)" }}
+      className="caret-icon"
+    />
+  );
   const sortSwitch = (header: any) => {
     console.log(sortedData);
     switch (header) {
       case "from":
         if (from === "descending") {
           setFrom("ascending");
+          setTo("");
+          setSubject("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: from,
@@ -42,6 +58,9 @@ export default function EmailSorter() {
 
         if (from === "ascending" || from === "") {
           setFrom("descending");
+          setTo("");
+          setSubject("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: from,
@@ -55,6 +74,9 @@ export default function EmailSorter() {
       case "to":
         if (to === "descending") {
           setTo("ascending");
+          setFrom("");
+          setSubject("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: to,
@@ -65,6 +87,9 @@ export default function EmailSorter() {
 
         if (to === "ascending" || to === "") {
           setTo("descending");
+          setFrom("");
+          setSubject("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: to,
@@ -77,6 +102,9 @@ export default function EmailSorter() {
       case "body":
         if (subject === "descending") {
           setSubject("ascending");
+          setTo("");
+          setFrom("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: subject,
@@ -87,6 +115,9 @@ export default function EmailSorter() {
 
         if (subject === "ascending" || subject === "") {
           setSubject("descending");
+          setTo("");
+          setFrom("");
+          setDate("");
           const sort: sortInterface = {
             sortBy: header,
             direction: subject,
@@ -100,6 +131,9 @@ export default function EmailSorter() {
       case "date":
         if (date === "descending") {
           setDate("ascending");
+          setFrom("");
+          setTo("");
+          setSubject("");
           const sort: sortInterface = {
             sortBy: header,
             direction: date,
@@ -110,6 +144,9 @@ export default function EmailSorter() {
 
         if (date === "ascending" || date === "") {
           setDate("descending");
+          setFrom("");
+          setTo("");
+          setSubject("");
           const sort: sortInterface = {
             sortBy: header,
             direction: date,
@@ -134,7 +171,12 @@ export default function EmailSorter() {
         ghost
         style={{ color: "rgb(136, 136, 136)" }}
       >
-        From
+        <Text strong>From</Text>
+        {from === "ascending"
+          ? ascendingCaret
+          : from === "descending"
+          ? descendingCaret
+          : ""}
       </Button>
       |
       <Button
@@ -144,6 +186,11 @@ export default function EmailSorter() {
         style={{ color: "rgb(136, 136, 136)" }}
       >
         To
+        {to === "ascending"
+          ? ascendingCaret
+          : to === "descending"
+          ? descendingCaret
+          : ""}
       </Button>
       |
       <Button
@@ -153,6 +200,11 @@ export default function EmailSorter() {
         style={{ color: "rgb(136, 136, 136)" }}
       >
         Subject
+        {subject === "ascending"
+          ? ascendingCaret
+          : subject === "descending"
+          ? descendingCaret
+          : ""}
       </Button>
       |
       <Button
@@ -162,6 +214,11 @@ export default function EmailSorter() {
         style={{ color: "rgb(136, 136, 136)" }}
       >
         Date
+        {date === "ascending"
+          ? descendingCaret
+          : date === "descending"
+          ? ascendingCaret
+          : ""}
       </Button>
     </div>
   );
