@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Table, Space, Tag } from "antd";
+import { Table, Space, Tag, Typography } from "antd";
 import { dateFormat } from "../utils/dateFormatter";
 import clipIcon from "../assets/icon_clip.svg";
 import "antd/dist/antd.css";
+
+const { Text } = Typography;
 
 const columns = [
   {
@@ -11,6 +13,13 @@ const columns = [
     dataIndex: "from",
     ellipsis: true,
     width: "15%",
+    render: (from: any) => {
+      return (
+        <a rel="noopener noreferrer" target="_blank" href={`mailto:${from}`}>
+          <Text>{from}</Text>
+        </a>
+      );
+    },
   },
 
   {
@@ -19,14 +28,28 @@ const columns = [
     render: (to: any) => {
       if (to.length > 1) {
         return (
-          <div style={{ display: "flex" }} className="tag-container">
-            <span>{to[0].address}...</span>
-            <Tag className="to-counter">+{to.length - 1}</Tag>
-          </div>
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href={`mailto:${to[0].address}`}
+          >
+            <div style={{ display: "flex" }} className="tag-container">
+              <Text>{to[0].address}...</Text>
+              <Tag className="to-counter">+{to.length - 1}</Tag>
+            </div>
+          </a>
         );
       } else {
         console.log(to.length);
-        return <span>{to[0].address}</span>;
+        return (
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href={`mailto:${to[0].address}`}
+          >
+            <Text>{to[0].address}</Text>
+          </a>
+        );
       }
     },
     width: "20%",
