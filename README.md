@@ -11,6 +11,12 @@
 - ~~Format time/date in mobile view correctly~~
 - ~~Implement onClick of to email address to launch email in browser~~
 - ~~Add carets when sorting in mobile view~~
+- Create modal to display single email
+- Style modal
+- Implement modal to desktop and mobile view
+- Add modal to display email body
+- Add IMPROVEMENTS.md
+- Add REPORT.md
 
 ## Nice Todos
 
