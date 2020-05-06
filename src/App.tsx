@@ -11,6 +11,7 @@ import EmailCounter from "./components/EmailCounter";
 import MobileHome from "./layout/MobileHome";
 import { useMediaQuery } from "react-responsive";
 import MediaQuery from "react-responsive";
+import EmailModal from "./components/EmailModal";
 
 const customizeRenderEmpty = () => (
   <div className="empty-container">
@@ -24,8 +25,9 @@ function App() {
 
   return (
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
-      {isMobile && <MobileHome />}
-      {isBigScreen && <Home />}
+      {/* {isMobile && <MobileHome />}
+      {isBigScreen && <Home />} */}
+      <EmailModal />
     </ConfigProvider>
   );
 }
