@@ -4,6 +4,7 @@ import { Table, Space, Tag, Typography } from "antd";
 import { dateFormat } from "../utils/dateFormatter";
 import clipIcon from "../assets/icon_clip.svg";
 import "antd/dist/antd.css";
+import { useHistory } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -90,10 +91,23 @@ const columns = [
 
 function EmailTable() {
   const emailData = useSelector((state: any) => state.filter.emails);
+  let history = useHistory();
 
   return (
     <Space>
       <Table
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: (event) => {
+              const location = {
+                pathname: "/email",
+                state: { email: record },
+              };
+
+              history.push(location);
+            }, // click row
+          };
+        }}
         dataSource={emailData}
         columns={columns}
         size="middle"

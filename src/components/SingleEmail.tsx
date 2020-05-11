@@ -8,7 +8,9 @@ import { mdiArrowLeft } from "@mdi/js";
 import { mdiArrowRight } from "@mdi/js";
 
 const { Text } = Typography;
-export const SingleEmail = () => {
+export const SingleEmail = (props: any) => {
+  console.log(props.location.state);
+
   return (
     <>
       <Row align="middle" className="col-icons" justify="center">
