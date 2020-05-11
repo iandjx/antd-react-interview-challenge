@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import filterReducer from "./store/reducers/filter";
 import sortReducer from "./store/reducers/sort";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { BrowserRouter } from "react-router-dom";
 
 const rootReducer = combineReducers({
   filter: filterReducer,
@@ -18,9 +19,11 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

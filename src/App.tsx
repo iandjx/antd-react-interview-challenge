@@ -11,8 +11,10 @@ import EmailCounter from "./components/EmailCounter";
 import MobileHome from "./layout/MobileHome";
 import { useMediaQuery } from "react-responsive";
 import MediaQuery from "react-responsive";
-import EmailModal from "./components/EmailModal";
+
 import { SingleEmail } from "./components/SingleEmail";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const customizeRenderEmpty = () => (
   <div className="empty-container">
@@ -26,10 +28,12 @@ function App() {
 
   return (
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
-      {/* {isMobile && <MobileHome />}
-      {isBigScreen && <Home />} */}
-      {/* <EmailModal /> */}
-      <SingleEmail />
+      <Switch>
+        {isMobile && <Route exact path="/" component={MobileHome} />}
+        {isBigScreen && <Route exact path="/" component={Home} />}
+        {/* <EmailModal /> */}
+        <Route exact path="/email" component={SingleEmail} />
+      </Switch>
     </ConfigProvider>
   );
 }
