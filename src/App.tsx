@@ -31,8 +31,9 @@ function App() {
       <Switch>
         {isMobile && <Route exact path="/" component={MobileHome} />}
         {isBigScreen && <Route exact path="/" component={Home} />}
-        {/* <EmailModal /> */}
         <Route exact path="/email" component={SingleEmail} />
+
+        {/* <EmailModal /> */}
       </Switch>
     </ConfigProvider>
   );
