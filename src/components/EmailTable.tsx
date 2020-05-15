@@ -35,7 +35,15 @@ const columns = [
             href={`mailto:${to[0].address}`}
           >
             <div style={{ display: "flex" }} className="tag-container">
-              <Text>{to[0].address}...</Text>
+              <Text
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {to[0].address}
+              </Text>
               <Tag className="to-counter">+{to.length - 1}</Tag>
             </div>
           </a>
@@ -58,7 +66,7 @@ const columns = [
   },
   {
     title: "Subject",
-    dataIndex: "body",
+    dataIndex: "subject",
     width: "50%",
     ellipsis: true,
   },
@@ -112,6 +120,7 @@ function EmailTable() {
         columns={columns}
         size="middle"
         showHeader={emailData.length > 0 ? true : false}
+        style={{ cursor: "pointer" }}
       />
     </Space>
   );

@@ -5,10 +5,12 @@ import { dateFormat } from "../utils/dateFormatter";
 
 import { Typography } from "antd";
 import clipIcon from "../assets/icon_clip.svg";
+import { useHistory } from "react-router-dom";
 
 const { Text } = Typography;
 
 export default function EmailCard(props: any) {
+  let history = useHistory();
   const { email } = props;
   //   console.log(email.to[0].address);
   let toEmail: any;
@@ -70,7 +72,18 @@ export default function EmailCard(props: any) {
 
   return (
     <div>
-      <Card size="small" style={{ width: 450 }}>
+      <Card
+        size="small"
+        style={{ width: 450, cursor: "pointer" }}
+        onClick={() => {
+          const location = {
+            pathname: "/email",
+            state: { email: email },
+          };
+
+          history.push(location);
+        }}
+      >
         <div style={{ display: "flex", width: "100%" }}>
           <img src={previewIcon} alt="preview icon" style={{ width: "1em" }} />
           <div style={{ marginLeft: "1em", flexGrow: 2 }}>
@@ -116,7 +129,7 @@ export default function EmailCard(props: any) {
             textOverflow: "ellipsis",
           }}
         >
-          {email.body}
+          {email.subject}
         </div>
       </Card>
     </div>

@@ -11,15 +11,14 @@
 - ~~Format time/date in mobile view correctly~~
 - ~~Implement onClick of to email address to launch email in browser~~
 - ~~Add carets when sorting in mobile view~~
-- Create modal to display single email
-- Style modal
-- Implement modal to desktop and mobile view
-- Add modal to display email body
-- Add IMPROVEMENTS.md
-- Add REPORT.md
+- ~~Create Page to display single email~~
+- ~~Style single email page~~
+- ~~Add IMPROVEMENTS.md~~
+- ~~Add REPORT.md~~
+- Display multiple emails in single email page
 
 ## Nice Todos
 
 - Sync sorting in mobile and desktop view
-- Transfer all styling to less
+- Switch to styled components for styling
 - Replace 'any' types

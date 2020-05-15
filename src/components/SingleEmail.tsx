@@ -9,7 +9,7 @@ import { mdiArrowRight } from "@mdi/js";
 import { useHistory } from "react-router-dom";
 import { dateFormat } from "../utils/dateFormatter";
 
-const { Text } = Typography;
+const { Title, Text } = Typography;
 export const SingleEmail = (props: any) => {
   console.log(props.location.state);
 
@@ -64,6 +64,11 @@ export const SingleEmail = (props: any) => {
         </Col>
       </Row>
       <Row align="middle" justify="center">
+        <Col span={22}>
+          <Title level={2}>{props.location.state.email.subject}</Title>
+        </Col>
+      </Row>
+      <Row align="middle" justify="center">
         <Col
           span={21}
           style={{ border: "1px solid #acb0bf", marginTop: "1em" }}
@@ -81,7 +86,7 @@ export const SingleEmail = (props: any) => {
                 paddingLeft: "10px",
               }}
             >
-              <Text>{props.location.state.email.from}</Text>
+              <Text>From: {props.location.state.email.from}</Text>
               <Text style={{ marginLeft: "auto" }}>
                 {dateFormat(props.location.state.email.date)}
               </Text>
@@ -101,6 +106,7 @@ export const SingleEmail = (props: any) => {
               }}
             >
               <Text>
+                To:{" "}
                 {props.location.state.email.to.reduce(
                   (addresses: any, email: any, index: any, array: any) => {
                     if (index === array.length - 1) {
@@ -118,7 +124,11 @@ export const SingleEmail = (props: any) => {
           <Row>
             <Col
               span={24}
-              style={{ borderTopStyle: "solid", borderTopWidth: "1px" }}
+              style={{
+                borderTopStyle: "solid",
+                borderTopWidth: "1px",
+                padding: "1em",
+              }}
             >
               {props.location.state.email.body}
             </Col>
